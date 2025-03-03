@@ -22,17 +22,17 @@ class Fixed
         float toFloat(void ) const;
         int toInt(void) const;
         
-        bool operator>(const Fixed &other);
-        bool operator<(const Fixed &other);
-        bool operator>=(const Fixed &other);
-        bool operator<=(const Fixed &other);
-        bool operator==(const Fixed &other);
-        bool operator!=(const Fixed &other);
+        bool operator>(const Fixed &other) const;
+        bool operator<(const Fixed &other) const;
+        bool operator>=(const Fixed &other) const;
+        bool operator<=(const Fixed &other) const;
+        bool operator==(const Fixed &other) const;
+        bool operator!=(const Fixed &other) const;
         
-        Fixed operator+(const Fixed &other);
-        Fixed operator-(const Fixed &other);
-        Fixed operator*(const Fixed &other);
-        Fixed operator/(const Fixed &other);
+        Fixed operator+(const Fixed &other) const;
+        Fixed operator-(const Fixed &other) const;
+        Fixed operator*(const Fixed &other) const;
+        Fixed operator/(const Fixed &other) const;
 
         Fixed operator++(int);
         Fixed operator--(int);
@@ -68,6 +68,12 @@ a++ ++a, --a, ++a
 https://learn.microsoft.com/ja-jp/cpp/cpp/increment-and-decrement-operator-overloading-cpp?view=msvc-170
 https://mickey24.hatenablog.com/entry/20081021/1224590753
 前置か後置の書き方
+
+https://qiita.com/YukiMiyatake/items/44bfd8b4b603950b6462
+前置と後置は性質が違う。
+前置は自分自身をインクリメント、
+後置は簡易的に元の値を保存し、自分をインクリメントし、元の値を返す。
+
 
 publicにメンバ関数を
 static
@@ -205,8 +211,27 @@ std::round(num * (1 << eightbits_));
 こういう書き方じゃないとだめ
 num << eightbits_
 だとinvalidになる。演算の型がちがうから
+num << eightbits_ は間違い！
+
+num は float 型 なのに ビットシフト (<<) を行おうとしている。
+<< は整数型（int, long, short など）にしか適用できない。
+float に対して << を使うと、コンパイルエラーや予期しない動作の原因になる。
+
     return (float)FixedPointNum_ / (1 << eightbits_);
 
     こういう書き方しないとなぜか整数で返されちゃう。
+
+#include <iostream>
+void add(const float num) {
+    std::cout << "num: " << num << std::endl;
+}
+
+int main() {
+    add(567.3/234); // 整数同士の割り算
+    return 0;
+}
+
+
+コンパイラ的にこういうのは整数で返されるらしい。
 
 */

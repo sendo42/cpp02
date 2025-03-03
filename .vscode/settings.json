@@ -52,6 +52,8 @@
         "vector": "cpp",
         "memory": "cpp",
         "print": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__node_handle": "cpp",
+        "__memory": "cpp"
     }
 }

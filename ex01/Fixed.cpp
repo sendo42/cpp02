@@ -16,7 +16,7 @@ Fixed::Fixed(const int num)
 Fixed::Fixed(const float num)
 {
     std::cout << "Float constructor called" << std::endl;
-    FixedPointNum_ =  std::round(num * (1 << eightbits_));
+    FixedPointNum_ =  std::roundf(num * (1 << eightbits_));
 }
 
 Fixed::~Fixed()
@@ -27,20 +27,16 @@ Fixed::~Fixed()
 Fixed::Fixed(const Fixed& fixed)
 {
     std::cout << "Copy constructor called" << std::endl;
-    if(this != &fixed)
-    {
-        *this = fixed;
-    }
-    // FixedPointNum_ = fixed.getRawBits();
+    // this->FixedPointNum_ = fixed.FixedPointNum_;
+    *this = fixed;
 }
 
 Fixed &Fixed::operator=(const Fixed &fixed)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    if(this != &fixed)
-    {
-        FixedPointNum_ = fixed.getRawBits();
-    }
+    if(this == &fixed)
+        return *this;
+    this->FixedPointNum_ = fixed.getRawBits();
     return *this;
 }
 

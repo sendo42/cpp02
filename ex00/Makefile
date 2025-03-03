@@ -1,5 +1,5 @@
 CC = c++
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 TARGET = ./a.out
 SRCS = Fixed.cpp \
 	main.cpp

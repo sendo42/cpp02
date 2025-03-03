@@ -55,6 +55,7 @@ myclass(const myclass& a) // Copy Constructor
 };
 
 コピー代入演算子は、動的メモリとかで二重解放やデータ破損を防ぐために使われる。
+https://www.asahi-net.or.jp/~yf8k-kbys/newcpp26.html
 
 https://www.ibm.com/docs/ja/i/7.4?topic=only-overloading-assignments-c
 https://www.ibm.com/docs/ja/i/7.4?topic=only-copy-assignment-operators-c#cplr392
